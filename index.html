@@ -1,11 +1,330 @@
 <!DOCTYPE html>
 <html lang="en_us">
     <head>
-        <meta charset = "UTF-8">
-        <meta name = "viewport" content = "width = device.width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Cumberland Touchstone</title>
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <style>
+            :root {
+            --blue: #007bff;
+            --indigo: #6610f2;
+            --purple: #6f42c1;
+            --pink: #e83e8c;
+            --red: #dc3545;
+            --orange: #fd7e14;
+            --yellow: #ffc107;
+            --green: #28a745;
+            --teal: #20c997;
+            --cyan: #17a2b8;
+            --white: #fff;
+            --gray: #6c757d;
+            --gray-dark: #343a40;
+            --primary: #8b0018;
+            --secondary: #6c757d;
+            --success: #28a745;
+            --info: #17a2b8;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --breakpoint-xs: 0;
+            --breakpoint-sm: 576px;
+            --breakpoint-md: 768px;
+            --breakpoint-lg: 992px;
+            --breakpoint-xl: 1200px;
+            --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        }
+            html {
+                height: auto;
+                font-family: var(--font-family-sans-serif);
+                color: var(--primary);
+                font-weight: 700;
+                white-space: nowrap;
+                background: linear-gradient(135deg, rgba(255, 126, 95, 0.8), rgba(254, 180, 123, 0.8), rgba(255, 209, 148, 0.8), rgba(212, 165, 165, 0.8), rgba(255, 111, 97, 0.8));
+                animation: gradient 15s ease infinite;
+                position: relative;
+            }
+
+            html::before {
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: url('images/grainy_texture.png') repeat; /* Add the path to your grainy texture image */
+                opacity: 0.5; /* Adjust the opacity to make the texture more or less visible */
+                z-index: 1;
+                pointer-events: none;
+                background-repeat: repeat; /* Ensure the background texture repeats */
+            }
+
+            @keyframes gradient {
+                0% {
+                    background-position: 0% 50%;
+                }
+                50% {
+                    background-position: 100% 50%;
+                }
+                100% {
+                    background-position: 0% 50%;
+                }
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                background: rgba(242, 242, 242, 0.3); /* Slightly transparent to show the texture */
+                display: flex;
+                flex-direction: column;
+            }
+
+            .top-bar {
+                width: 100%;
+                background-color: #212121;
+                color: #fff;
+                padding: 1em 0;
+                text-align: center;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 1000;
+            }
+
+            h1 {
+                font-size: 2em;
+                font-weight: 400;
+                text-align: center;
+                padding-top: 1em;
+                z-index: 2;
+                position: relative;
+            }
+
+            .navbar {
+                background-color: var(--white);
+                overflow: hidden;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                z-index: 1000;
+                display: flex;
+                align-items: right;
+            }
+
+            .navbar ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #212121;
+                text-align: right;
+                display: flex;
+                width: 100%;
+                flex-direction: row-reverse;
+                justify-content: flex-start;
+            }
+
+            .navbar img {
+                margin-left: 10px;
+            }
+
+            .navbar li {
+                display: inline;
+                padding: 14px 16px;
+            }
+
+            .navbar a {
+                text-decoration: none;
+                color: var(--white);
+                padding: 14px 16px;
+                display: inline-block;
+            }
+
+            .navbar a:hover {
+                background-color: var(--primary);
+                color: var(--white);
+            }
+
+            .sidebar {
+                width: 250px;
+                background-color: #343a40;
+                color: var(--white);
+                box-sizing: border-box;
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100%;
+                z-index: 999;
+                overflow: hidden;
+            }
+
+            .sidebar img {
+                width: auto;
+                height: 100%;
+                position: relative;
+                left: -980px;
+            }
+
+            .content {
+                padding: 2em;
+                margin-left: 250px; /* Adjust this value based on the sidebar width */
+                padding-top: 80px; /* Add padding to respect the navbar height */
+                flex: 1;
+            }
+
+            .headline-section {
+                display: flex;
+                align-items: flex-start;
+                margin-top: 2em;
+                gap: 1em;
+                z-index: 2;
+                position: relative;
+            }
+
+            .headline-section img {
+                width: 50%;
+                height: 50%;
+                border-radius: 8px; /* Add this line to round the corners */
+            }
+
+            .article-section {
+                margin-top: 2em;
+                padding: 1em;
+                background-color: var(--light);
+                border: 1px solid var(--gray);
+                text-wrap: wrap;
+                border-radius: 8px;
+                z-index: 2;
+                position: relative;
+            }
+
+            .bento-box {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1em;
+                justify-content: center;
+                margin-top: 2em;
+            }
+
+            .welcome-box {
+                border-radius: 0.5em;
+                border: 1px solid var(--primary);
+                padding: 1em;
+                background-color: var(--light);
+                text-align: center;
+                border-radius: 8px;
+                z-index: 2;
+                position: relative;
+            }
+
+            .bento-item {
+                color: var(--white);
+                background-image: linear-gradient(rgba(139, 0, 24, 0.9), rgba(139, 0, 24, 0.9));
+                mix-blend-mode: multiply;
+                backdrop-filter: blur(2px);
+                border: 2px solid var(--secondary);
+                border-radius: 8px;
+                padding: 1em;
+                text-wrap-mode: wrap;
+                z-index: 2;
+                flex: 1 1 calc(33.333% - 2em);
+                box-sizing: border-box;
+                text-align: center;
+            }
+
+            img {
+                z-index: 2;
+            }
+
+            @media (max-width: var(--breakpoint-md)) {
+                .bento-item {
+                    flex: 1 1 calc(50% - 2em);
+                }
+            }
+
+            @media (max-width: var(--breakpoint-sm)) {
+                .bento-item {
+                    flex: 1 1 100%;
+                }
+            }
+
+            .floating-button {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background-color: var(--primary);
+                color: var(--white);
+                border: none;
+                border-radius: 50px;
+                padding: 15px 20px;
+                font-size: 16px;
+                font-weight: bold;
+                cursor: pointer;
+                z-index: 1001;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                transition: background-color 0.3s;
+            }
+
+            .floating-button:hover {
+                background-color: rgb(97, 1, 17);
+            }
+        </style>
     </head>
     <body>
-
+        <div class="sidebar">
+            <img src="images/tower.png" alt="Sidebar Image">
+        </div>
+        <div class="navbar">
+            <ul>
+                <img src="images/logo.png" width="auto" height="auto">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <div class="welcome-box">
+                <h2>Welcome to Cumberland Touchstone</h2>
+                <p>Your source for the latest news and updates.</p>
+            </div>
+            <div class="headline-section">
+                <img src="images/campus.png" alt="Headline Image">
+                <div class="article-section">
+                    <h2>Article Title</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+            </div>
+            <div class="bento-box">
+                <img src="images/firepit.png" alt="Cumberland Touchstone Logo" width="200" height="200">
+                <div class="bento-item">
+                    <h2>Item Title</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+                <img src="images/firepit.png" alt="Cumberland Touchstone Logo" width="200" height="200">
+                <div class="bento-item">
+                    <h2>Item Title</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+                <div class="bento-item">
+                    <h2>Item Title</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+                <div class="bento-item">
+                    <h2>Item Title</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+                <img src="images/firepit.png" alt="Cumberland Touchstone Logo" width="200" height="200">
+                <div class="bento-item">
+                    <h2>Item Title</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+                <div class="bento-item">
+                    <h2>Item Title</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+            </div>
+        </div>
+        <button class="floating-button">School Calendar</button>
     </body>
 </html>

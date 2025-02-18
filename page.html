@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal Example</title>
+    <style>
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Button to open the modal -->
+<button id="openModalBtn">Open Modal</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Phone Number: (123) 456-7890</p>
+    <p>Email: example@example.com</p>
+    <p>Office Location: 123 Main St, Anytown, USA</p>
+  </div>
+
+</div>
+
+<script>
+    class Modal {
+        constructor(modalId, openBtnId, closeClass) {
+            this.modal = document.getElementById(modalId);
+            this.btn = document.getElementById(openBtnId);
+            this.span = document.getElementsByClassName(closeClass)[0];
+
+            this.init();
+        }
+
+        init() {
+            this.btn.onclick = () => {
+                this.modal.style.display = "block";
+            }
+
+            this.span.onclick = () => {
+                this.modal.style.display = "none";
+            }
+
+            window.onclick = (event) => {
+                if (event.target == this.modal) {
+                    this.modal.style.display = "none";
+                }
+            }
+        }
+    }
+
+    // Initialize the modal
+    new Modal("myModal", "openModalBtn", "close");
+</script>
+
+</body>
+</html>

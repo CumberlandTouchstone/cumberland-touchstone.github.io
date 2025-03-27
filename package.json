@@ -24,6 +24,9 @@
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.9",
     "@tailwindcss/typography": "^0.5.15",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^3.4.17",
+    "@iconify-json/hugeicons": "^1.2.3",
+    "@iconify-json/mdi": "^1.2.2",
+    "@iconify-json/solar": "^1.2.2"
   }
 }

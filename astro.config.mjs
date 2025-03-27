@@ -18,5 +18,6 @@ export default defineConfig({
     sitemap(),
     mdx(),
   ],
-  adapter: vercel()
+  adapter: vercel(),
+  site: "http://localhost:4321/",
 });

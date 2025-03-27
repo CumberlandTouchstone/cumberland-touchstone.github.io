@@ -1,21 +1,23 @@
 ---
+export const prerender = false;
+
+import { fetchPost } from '@/utils/posts';
 import BlogPost from '../../layouts/BlogPost.astro';
 
-export const prerender = false;
 const { resource } = Astro.params;
 
-const md = await fetch(new URL(`api/read?name=${resource}`, Astro.url.origin), {
-    method: "GET",
-});
+if (!resource)
+    return new Response(null, { status: 404 })
 
-if (!md.ok) {
-    return new Response(null, { status: md.status })
-}
+const data = await fetchPost(resource, Astro.url.origin);
 
-const data = await md.json();
+if (data instanceof Response)
+    return data;
 
-const meta = data.get("meta");
-const content = data.get("content");
+const meta = data.meta;
+const content = data.content;
 ---
 
-<BlogPost set:html={content} post={meta} />
+<BlogPost post={{data: meta}}>
+    <div set:html={content}></div>
+</BlogPost>

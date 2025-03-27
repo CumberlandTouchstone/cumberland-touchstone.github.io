@@ -1,19 +1,24 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Base from '@/layouts/Base.astro';
 ---
 
-<Layout>
+<Base meta={{ title: "Home" }}>
     <form action="/api/publish" method="post">
         <label for="ptitle">
             Title:
-            <input type="text" id="ptitle" name="title">
+            <input class="w-full" type="text" id="ptitle" name="title" minlength="5" required />
+        </label>
+        <br>
+        <label for="pdescription">
+            Short description:
+            <textarea class="w-full" id="pdescription" name="description" minlength="10" required />
         </label>
         <br>
         <label for="pcontent">
             Content:
-            <textarea id="pcontent" name="content" />
+            <textarea class="w-full h-fit" id="pcontent" name="content" minlength="100" required />
         </label>
         <br>
-        <input type="submit" value="Submit">
+        <input class="bg-green-500 p-2 border-dotted rounded-full text-slate-50" type="submit" value="Submit">
     </form>
-</Layout>
+</Base>

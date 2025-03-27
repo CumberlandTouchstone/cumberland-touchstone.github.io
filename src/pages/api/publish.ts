@@ -15,15 +15,26 @@ export const POST: APIRoute = async ({ request, redirect }) => {
   const form = await request.formData();
 
   const title = form.get("title");
+  const description = form.get("description");
   const content = form.get("content");
 
-  if (!title || !content)
+  if (!title || !description || !content)
     return fail();
 
-  return createPost(title.toString(), content.toString(), redirect);
+  return createPost(title.toString(), description.toString(), content.toString(), redirect);
 };
 
-async function createPost(title: string, rawContent: string, redirect: (path: string, status?: any) => Response): Promise<Response> {
+type PostMeta = {
+  ogImage: string | null;
+  title: string;
+  description: string;
+  updatedDate: string | null;
+  publishDate: Date;
+  seriesId: string | null;
+  ref: string;
+};
+
+async function createPost(title: string, description: string, rawContent: string, redirect: (path: string, status?: any) => Response): Promise<Response> {
   const fileName = title.replace(/[\/|\\:*?"<>\s]/g, "-");
   
   const content = DOMPurify.sanitize(await marked.parse(rawContent));
@@ -39,8 +50,14 @@ async function createPost(title: string, rawContent: string, redirect: (path: st
     }
   });
 
-  const metadata = {
-    title: title,
+  const metadata: PostMeta = {
+    title,
+    description,
+    publishDate: new Date(),
+    seriesId: null,
+    ogImage: null,
+    updatedDate: null,
+    ref: fileName,
   };
 
   fs.writeFile(filePath + ".json", JSON.stringify(metadata), err => {

@@ -4,10 +4,7 @@ import fs from "node:fs";
 export const prerender = false;
 
 export const GET: APIRoute = async ({ params, request, props }) => {
-    console.log(params);
-    console.log(request);
-    console.log(props);
-    const name  = params.abc;
+    const name = params.name;
 
     const contentPath = `out/${name}.html`;
     const metaPath = contentPath + ".json";
@@ -18,9 +15,9 @@ export const GET: APIRoute = async ({ params, request, props }) => {
     }
 
     const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
-    const content = JSON.parse(fs.readFileSync(contentPath, 'utf8'));
+    const content = fs.readFileSync(contentPath, 'utf8');
 
     return new Response(JSON.stringify({
         meta: meta, content: content
-    }), { status: 402 });
+    }), { status: 200 });
 };

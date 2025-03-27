@@ -1,0 +1,21 @@
+---
+import BlogPost from '../../layouts/BlogPost.astro';
+
+export const prerender = false;
+const { resource } = Astro.params;
+
+const md = await fetch(new URL(`api/read?name=${resource}`, Astro.url.origin), {
+    method: "GET",
+});
+
+if (!md.ok) {
+    return new Response(null, { status: md.status })
+}
+
+const data = await md.json();
+
+const meta = data.get("meta");
+const content = data.get("content");
+---
+
+<BlogPost set:html={content} post={meta} />

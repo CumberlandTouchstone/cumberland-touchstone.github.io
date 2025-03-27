@@ -3,5 +3,17 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
-
+    <form action="/api/publish" method="post">
+        <label for="ptitle">
+            Title:
+            <input type="text" id="ptitle" name="title">
+        </label>
+        <br>
+        <label for="pcontent">
+            Content:
+            <textarea id="pcontent" name="content" />
+        </label>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
 </Layout>

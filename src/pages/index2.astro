@@ -1,3 +1,14 @@
+---
+import {
+    Image,
+    Picture,
+    getImage,
+    inferRemoteSize,
+} from 'astro:assets';
+
+import towerImage from "../assets/tower.png";
+---
+
 <!DOCTYPE html>
 <html lang="en_us">
     <head>
@@ -5,13 +16,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Cumberland Touchstone</title>
         <link rel="icon" type="image/x-icon" href="favicon.ico">
-        <script src="modal.js"></script>
         <style>
             :root {
             --blue: #007bff;
             --indigo: #6610f2;
             --purple: #6f42c1;
-            --pink: #e83e8c;
+            --pink: #e83e8c;x   
             --red: #dc3545;
             --orange: #fd7e14;
             --yellow: #ffc107;
@@ -312,7 +322,7 @@
     </head>
     <body>
         <div class="sidebar">
-            <img src="images/tower.png" alt="Sidebar Image">
+            <Image src={towerImage} alt="Sidebar Image" />
         </div>
         <div id="myModal" class="modal">
 

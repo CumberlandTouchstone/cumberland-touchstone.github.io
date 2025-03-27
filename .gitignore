@@ -22,4 +22,5 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
-out
+out/*.html
+out/*.json

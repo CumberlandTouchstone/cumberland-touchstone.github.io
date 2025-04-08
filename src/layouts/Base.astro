@@ -27,11 +27,16 @@ const {
 		<ThemeProvider />
 		<SkipLink />
 
-		<!-- Background 
-			TODO: This approach is not optimal and requires improvements. 
-  			- Too many absolutely positioned elements can affect performance. 
-  		-->	
+		<!-- Background -->
 		<div class="fixed top-0 left-1/2 -ml-[50vw] min-h-screen w-screen pointer-events-none blur-2xl">
+			<div class="absolute inset-0">
+				<img
+					id="background-image"
+					src="/src/assets/firepit.png"
+					alt="Background"
+					class="w-full h-full object-cover opacity-25 pointer-events-none transition-opacity duration-1000 ease-in-out transform scale-100"
+				/>
+			</div>
 			<div class="absolute top-[-90%] right-[25%] w-[75%] h-full bg-gradient-to-b from-blue-300 via-pink-300 to-transparent rounded-full opacity-40 dark:opacity-5"></div>
 			<div class="absolute top-[-90%] left-[25%] w-[75%] h-full bg-gradient-to-b from-blue-300 via-pink-300 to-transparent rounded-full opacity-40 dark:opacity-5"></div>
 			<div class="absolute top-[-85%] right-[25%] w-[55%] h-full bg-gradient-to-b from-purple-300 via-blue-300 to-transparent rounded-full opacity-40 dark:opacity-5"></div>
@@ -56,5 +61,29 @@ const {
 				</div>
 			</div>
 		</div>
+
+		<script>
+			const images = [
+				'/src/assets/firepit.png',
+				'/src/assets/campus.png',
+				'/src/assets/tower.png',
+			];
+			let currentIndex = 0;
+
+			const backgroundImage = document.getElementById('background-image');
+			setInterval(() => {
+				currentIndex = (currentIndex + 1) % images.length;
+				if (backgroundImage) {
+					backgroundImage.style.transition = 'opacity 1s ease-in-out, transform 10s ease-in-out';
+					backgroundImage.style.opacity = '0'; // Fade out
+					setTimeout(() => {
+						(backgroundImage as HTMLImageElement).src = images[currentIndex];
+						backgroundImage.style.transform = 'scale(1)'; // Reset zoom
+						backgroundImage.style.opacity = '0.25'; // Fade in
+						backgroundImage.style.transform = 'scale(1.1)'; // Slowly zoom in
+					}, 1000); // Match fade-out duration
+				}
+			}, 10000); // Change every 10 seconds
+		</script>
 	</body>
 </html>

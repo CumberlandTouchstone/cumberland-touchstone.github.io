@@ -1,0 +1,89 @@
+---
+export const prerender = false;
+
+import PageLayout from "@/layouts/Base.astro";
+
+const meta = {
+	description: "Ask a Historical Figure",
+	title: "Ask a Historical Figure",
+};
+
+// Example data for historical figures and their absurd reactions
+interface HistoricalFigure {
+	name: string;
+	question: string;
+	reaction: string;
+}
+
+const historicalFigures: HistoricalFigure[] = [
+	{
+		name: "Albert Einstein",
+		question: "What does Y = MX+B MEAN?? I HAVE A PARABOLA ASSIGNMENT DUE IN 2 HOURS - DESPERATE STUDENT",
+		reaction: "Why are you asking me about your math homework? Time is relative, so is your deadline.",
+	},
+	{
+		name: "Cleopatra",
+		question: "What was the secret to your beauty? - Insecure Student",
+		reaction: "Do you think I ruled Egypt just to answer your questions about ancient history?",
+	},
+	{
+		name: "Leonardo da Vinci",
+		question: "Why did you draw so many naked people? - First Year Art Student",
+		reaction: "Art is about the human form, my friend. Plus, it was a great way to avoid painting backgrounds.",
+	},
+	{
+		name: "Marie Curie",
+		question: "Can you explain the principles of radioactivity and its applications in modern science? - Curious Student",
+		reaction: "Sure, but only if you promise not to glow in the dark like I did. It's not as fun as it sounds.",
+	},
+	{
+		name: "Napoleon Bonaparte",
+		question: "I need help, my group project is due tomorrow and my groupmates left me in the dust, what do you recommend? - Theo B. English",
+		reaction: "A group project? Sounds like a battlefield. Lead with strategy, execute with precision, fight for your glory.",
+	},
+	{
+		name: "Ada Lovelace",
+		question: "My code no work :( pls help - Isaiah Crace",
+		reaction: "Debugging your code? Have you tried turning your logic off and on again?",
+	},
+	{
+		name: "Socrates",
+		question: "What did you die from again? I don't remember. - Iam Lazhee",
+		reaction: "Why do you ask? Is it because you seek wisdom, or because you forgot to study?",
+	},
+	{
+		name: "Joan of Arc",
+		question: "What does 'i before e except after c' even mean? Is it a secret code? - Confused Student",
+		reaction: "A secret code? No, just another battle in the endless war of English grammar. Stay vigilant, soldier.",
+	},
+];
+
+function shuffleArray<T>(array: T[]): T[] {
+	return array.sort(() => Math.random() - 0.5);
+}
+
+const shuffledFigures = shuffleArray(historicalFigures);
+---
+
+<PageLayout meta={meta}>
+	<section style="text-align: center; padding: 2rem;">
+		<h1 class="title mb-6 flex items-center justify-center gap-2" style="text-align: center;">
+			Ask a Historical Figure
+		</h1>
+		<p style="font-size: 1.2rem; margin-top: 1rem;">
+			Have fun exploring the witty responses of historical figures!
+		</p>
+	</section>
+	<section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; padding: 2rem;">
+		{shuffledFigures.map((figure: HistoricalFigure) => (
+			<div 
+				class="p-4 border rounded-lg shadow-md transition-transform duration-300 hover:scale-105" 
+				style="background-color: #000000a4; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);"
+			>
+				<h2 class="text-xl font-bold" style="margin-bottom: 0.5rem;">{figure.name}</h2>
+				<p class="mt-2 text-gray-300">"{figure.question}"</p>
+				<p class="mt-2 text-gray-300"><strong>{figure.reaction}</strong></p>
+			</div>
+		))}
+	</section>
+</PageLayout>

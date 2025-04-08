@@ -2,6 +2,7 @@
 import { menuLinks, siteConfig } from "@/site.config";
 
 const year = new Date().getFullYear();
+const faviconPath = "/favicon.ico"; // Adjust the path if needed
 ---
 
 <footer
@@ -9,7 +10,7 @@ const year = new Date().getFullYear();
 >
 	<div class="me-0 font-semibold sm:me-4">
 		&copy; {siteConfig.author}
-		{year}.<span class="inline-block">&nbsp;🚀&nbsp;{siteConfig.title}</span>
+		{year}.<span class="inline-block">&nbsp;<img src={faviconPath} alt="Site Favicon" class="inline-block w-4 h-4" />&nbsp;{siteConfig.title}</span>
 	</div>
 	<nav
 		aria-label="More on this site"

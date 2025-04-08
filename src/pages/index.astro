@@ -1,11 +1,52 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from "../layouts/Base.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const meta = {
+	description: "Welcome to Cumberland University's student-run newspaper, Helios!",
+	title: "Helios - Cumberland University",
+};
+
+// Import images from the assets directory
+import image1 from "../assets/campus.png";
+import image2 from "../assets/firepit.png";
+import image3 from "../assets/tower.png";
+import image4 from "../assets/logo.png";
 ---
-
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout meta={meta}>
+	<section style="text-align: center; padding: 2rem;">
+		<h1>Welcome to Cumberland University's very own student-run newspaper, Helios!</h1>
+		<p style="font-size: 1.2rem; margin-top: 1rem;">
+			Stay informed with the latest news, stories, and updates from our talented student journalists.
+		</p>
+	</section>
+	<section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; padding: 2rem;">
+		<img 
+			src={image1.src} 
+			alt="Image 1" 
+			style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: transform 0.3s;" 
+			onmouseover="this.style.transform='scale(1.1)'" 
+			onmouseout="this.style.transform='scale(1)'"
+		/>
+		<img 
+			src={image2.src} 
+			alt="Image 2" 
+			style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: transform 0.3s;" 
+			onmouseover="this.style.transform='scale(1.1)'" 
+			onmouseout="this.style.transform='scale(1)'"
+		/>
+		<img 
+			src={image3.src} 
+			alt="Image 3" 
+			style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: transform 0.3s;" 
+			onmouseover="this.style.transform='scale(1.1)'" 
+			onmouseout="this.style.transform='scale(1)'"
+		/>
+		<img 
+			src={image4.src} 
+			alt="Image 4" 
+			style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: transform 0.3s;" 
+			onmouseover="this.style.transform='scale(1.1)'" 
+			onmouseout="this.style.transform='scale(1)'"
+		/>
+	</section>
+</BaseLayout>

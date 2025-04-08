@@ -34,6 +34,10 @@ export const menuLinks: { path: string; title: string }[] = [
 	},
 	{
 		path: "/conversation/",
-		title: "Ask A Question...",
+		title: "Ask An Ancient!",
+	},
+	{
+		path: "/pictures/",
+		title: "Pictures",
 	},
 ];

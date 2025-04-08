@@ -1,0 +1,42 @@
+---
+import BaseLayout from "@/layouts/Base.astro";
+
+const meta = {
+	description: "Welcome to Cumberland University's student-run newspaper, Helios!",
+	title: "Helios - Cumberland University",
+};
+
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/gallery/**/*.{jpeg,jpg,png,gif}', { eager: true });
+
+const groupedImages = Object.entries(images).reduce((groups: Record<string, any[]>, [path, image]) => {
+	const folder = path.split('/').slice(-2, -1)[0];
+	if (!groups[folder]) groups[folder] = [];
+	groups[folder].push(image.default);
+	return groups;
+}, {} as Record<string, any[]>);
+---
+
+<BaseLayout meta={meta}>
+	<section style="text-align: center; padding: 2rem;">
+		<h1>Picture Gallery</h1>
+		<p style="font-size: 1.2rem; margin-top: 1rem;">
+			Welcome to the Helios Picture Gallery! Here, you can explore a collection of images that capture the essence of our campus life and events. Each folder contains a unique set of images, showcasing different aspects of Cumberland University.
+		</p>
+	</section>
+	{Object.entries(groupedImages).map(([folder, images]) => (
+		<section>
+			<h2 style="text-align: center; margin-top: 2rem;">{folder}</h2>
+			<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; padding: 2rem;">
+				{images.map((image, index) => (
+					<img 
+						src={image.src} 
+						alt={`Image ${index + 1}`} 
+						style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: transform 0.3s;" 
+						onmouseover="this.style.transform='scale(1.1)'"
+						onmouseleave="this.style.transform='scale(1)'"
+					/>
+				))}
+			</div>
+		</section>
+	))}
+</BaseLayout>

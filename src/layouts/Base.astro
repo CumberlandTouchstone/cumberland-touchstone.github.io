@@ -23,12 +23,12 @@ const {
 	<head>
 		<BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
 	</head>
-	<body class="min-w-4xl relative m-auto min-h-screen w-full max-w-6xl grow bg-bgColor">
+	<body class="relative min-h-screen w-full grow bg-bgColor">
 		<ThemeProvider />
 		<SkipLink />
 
 		<!-- Background -->
-		<div class="fixed top-0 left-1/2 -ml-[50vw] min-h-screen w-screen pointer-events-none blur-2xl">
+		<div class="fixed top-0 left-0 w-full h-full pointer-events-none blur-2xl">
 			<div class="absolute inset-0">
 				<img
 					id="background-image"
@@ -51,7 +51,7 @@ const {
 			<!-- Sidebar for Docs Series -->
 			<slot name="sidebar" />
 			<!-- Main container for the page content -->
-			<div id="container" class="min-w-3xl relative m-auto max-w-4xl grow">
+			<div id="container" class="relative w-full px-4 grow">
 				<div class="m-auto grid min-h-screen md:grid-rows-[auto_auto_1fr] px-4 md:px-8 md:pt-4">
 					<Header />
 					<main id="main" class="relative flex-grow mt-32 md:mt-[3.5rem]">

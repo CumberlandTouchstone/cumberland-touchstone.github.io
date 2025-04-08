@@ -19,5 +19,5 @@ export default defineConfig({
     mdx(),
   ],
   adapter: vercel(),
-  site: "http://localhost:4321/",
+  site: "http://cumberland-touchstone.github.io/",
 });
